@@ -31,7 +31,7 @@ namespace Assets.CodeCore.Scripts.Game.Startup.GameStates.States
             LevelData levelData = _levelDataProvider.LevelData;
             await _loadLevelService.LoadLevel(levelData);
 
-            _stateSwitcher.TrySwitchState<PlayState>(); 
+            _stateSwitcher.TrySwitchState<CodingState>(); 
         }
 
         public void Exit()

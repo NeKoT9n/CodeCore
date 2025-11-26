@@ -1,5 +1,6 @@
 ﻿using Assets.CodeCore.Scripts.Game.Infostracture.Factories;
 using Assets.CodeCore.Scripts.Game.Infostracture.StateMachine;
+using Assets.CodeCore.Scripts.Game.Infostracture.StateMachine.States;
 using Assets.CodeCore.Scripts.Game.Startup.GameStates;
 using Assets.CodeCore.Scripts.Game.Startup.GameStates.States;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace Assets.CodeCore.Scripts.Game.Startup
             {
                 _gameStateFactory.CreateState<InitializeState>(),
                 _gameStateFactory.CreateState<LoadLevelState>(),
-                _gameStateFactory.CreateState<PlayState>(),
+                _gameStateFactory.CreateState<CodingState>(),
+                _gameStateFactory.CreateState<ScriptCompileState>(),
                 _gameStateFactory.CreateState<PauseState>()
             });
 

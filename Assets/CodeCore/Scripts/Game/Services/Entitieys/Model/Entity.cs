@@ -1,4 +1,5 @@
 ﻿using Assets.CodeCore.Scripts.Game.Services.Entitieys.Data;
+using Assets.CodeCore.Scripts.Game.Services.Scripts.Data;
 using Assets.CodeCore.Scripts.Game.Services.Scripts.Model;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -11,6 +12,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Model
 
         public AssetReferenceGameObject Prefab => _entityData.Prefab;
         public string Name => _entityData.Name;
+        public EntityTypeId Type => _entityData.EntityType;
         public Vector2 SpawnPosition { get; private set; }
         public Script Script { get; private set; }
 

@@ -1,9 +1,9 @@
 ﻿using Assets.CodeCore.Scripts.Commands;
+using Assets.CodeCore.Scripts.Game.Infostracture.StateMachine.States;
 using Assets.CodeCore.Scripts.Game.Services;
 using Assets.CodeCore.Scripts.Game.Services.Code.Model;
 using Assets.CodeCore.Scripts.Game.Services.Commands.Registry;
 using Assets.CodeCore.Scripts.Game.Services.Entitieys.Model;
-using System;
 using Zenject;
 
 namespace Assets.CodeCore.Scripts.Game.Startup
@@ -25,8 +25,27 @@ namespace Assets.CodeCore.Scripts.Game.Startup
                 .Bind<EntityService>()
                 .AsSingle();
 
+            BindCompileSystem();
             BindFactories();
             BindCommands();
+        }
+
+        private void BindCompileSystem()
+        {
+            Container
+                .Bind<ICompiler>()
+                .To<ScriptCompileService>()
+                .AsSingle();
+
+            Container
+               .Bind<IErrorService>()
+               .To<ErrorService>()
+               .AsSingle();
+
+            Container
+               .Bind<IParser>()
+               .To<ScriptParser>()
+               .AsSingle();
         }
 
         private void BindFactories()
@@ -36,8 +55,8 @@ namespace Assets.CodeCore.Scripts.Game.Startup
 
         private void BindCommands()
         {
+            Container.BindInterfacesAndSelfTo<CommandRegistryService>().AsSingle();
             Container.Bind<ICommandService>().To<CommandService>().AsSingle();
-            Container.Bind<CommandRegistryService>().AsSingle();
             Container.Bind<CommandRegistry>().AsSingle();
 
             BindProfiles();

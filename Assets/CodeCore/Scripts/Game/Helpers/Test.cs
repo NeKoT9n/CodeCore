@@ -1,6 +1,5 @@
-﻿using Assets.CodeCore.Scripts.Game.Services;
-using Assets.CodeCore.Scripts.Game.Services.SceneLoad;
-using UnityEditor.Build.Content;
+﻿using Assets.CodeCore.Scripts.Game.Infostracture.StateMachine.States;
+using Assets.CodeCore.Scripts.Game.Infostracture.StateMachine;
 using UnityEngine;
 using Zenject;
 
@@ -8,11 +7,11 @@ namespace Assets.CodeCore.Scripts.Game.Helpers
 {
     public class Test : MonoBehaviour
     {
-        [Inject] private SceneLoadService _loadLevelService;
+        [Inject] private IStateSwitcher _stateSwitcher;
         
-        public async void LoadMainMenu()
+        public void EnterCompileState()
         {
-            await _loadLevelService.LoadMainMenuScene();
+            _stateSwitcher.TrySwitchState<ScriptCompileState>();
         }
 
     }

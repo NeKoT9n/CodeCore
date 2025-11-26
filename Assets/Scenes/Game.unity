@@ -1312,7 +1312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1431426675
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1390,7 +1390,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1431426676}
         m_TargetAssemblyTypeName: Assets.CodeCore.Scripts.Game.Helpers.Test, Assembly-CSharp
-        m_MethodName: LoadMainMenu
+        m_MethodName: EnterCompileState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

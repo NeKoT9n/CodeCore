@@ -1,6 +1,7 @@
 ﻿using Assets.CodeCore.Scripts.Game.Infostracture;
 using Assets.CodeCore.Scripts.Game.Services.Entitieys.Model;
 using Assets.CodeCore.Scripts.Game.Services.Scripts.Data;
+using ModestTree;
 using System;
 using System.Collections.Generic;
 
@@ -20,15 +21,19 @@ namespace Assets.CodeCore.Scripts.Game.Services
             return _resolvers[typeId];
         }
 
-        public ICommand Create(EntityTypeId typeId, string commandName, Entity entity, object[] args)
+        public CreatedCommandResult Create(EntityTypeId typeId, string commandName, Entity entity, object[] args)
         {
+            CreatedCommandResult result = new();
+
             if (_resolvers.TryGetValue(typeId, out var resolver) == false)
-                throw new ArgumentException($"Entity type '{typeId}' not register in '{nameof(EntityCommandResolver)}'");
+                throw new Exception($"Entity type '{typeId}' not register in '{nameof(EntityCommandResolver)}'");
 
             if (resolver.TryCreateCommand(commandName, entity, args, out var command) == false)
                 throw new ArgumentException($"Command '{commandName}' not found for entity type '{typeId}'");
+   
+            result.Command = command;
 
-            return command;
+            return result;
         }
 
         public CommandConfigurator For(EntityTypeId typeId)
@@ -37,5 +42,13 @@ namespace Assets.CodeCore.Scripts.Game.Services
             return new CommandConfigurator(resolver);
         }
 
+    }
+
+    public struct CreatedCommandResult
+    {
+        public readonly bool IsFailure => !string.IsNullOrEmpty(Error);
+        public ICommand Command;
+
+        public string Error;
     }
 }
