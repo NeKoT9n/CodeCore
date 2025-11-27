@@ -66,7 +66,7 @@ namespace Assets.CodeCore.Scripts.Game.Infostracture.StateMachine.States
                 }
                 catch (CommandException ex)
                 {
-                    errors.Add(ex.Message);
+                    errors.Add($"Command Error (Line {parseLine.Line}): {ex.Message} {ex.Message}");
                 }
 
             }

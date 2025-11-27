@@ -1,6 +1,7 @@
 ﻿using Assets.CodeCore.Scripts.Game.Helpers;
 using Assets.CodeCore.Scripts.Game.Providers.Entities;
 using Assets.CodeCore.Scripts.Game.Services.Entitieys.Data;
+using Assets.CodeCore.Scripts.Game.Services.Entitieys.Impl;
 using Assets.CodeCore.Scripts.Game.Services.Entitieys.Model;
 using Assets.CodeCore.Scripts.Game.Services.Scripts.Data;
 using Cysharp.Threading.Tasks;
@@ -41,7 +42,12 @@ namespace Assets.CodeCore.Scripts.Game.Services
         public Entity Create(EntityTypeId typeId, Vector2 position)
         {
             EntityData data = _entityDataProvider.GetBy(typeId);
-            return new(data, position);
+
+            return typeId switch
+            {
+                EntityTypeId.Player => new Player(data, position),
+                _ => new(data, position),
+            };
         }
 
         public List<Entity> Create(List<SpawnPoint> spawnPoints)

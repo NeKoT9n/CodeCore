@@ -19,9 +19,15 @@ namespace Assets.CodeCore.Scripts.Game.Services
         {
             _resolver.Register(commandName, (entity, rawArgs) =>
             {
+                TEntity concreteEntity = entity as TEntity ?? throw new InvalidOperationException(
+                        $"Type mismatch during command creation '{commandName}'. " +
+                        $"Expected entity type '{typeof(TEntity).Name}', but received '{entity.GetType().Name}'. " +
+                        "Check CommandRegistry logic."
+                    );
+
                 var reader = new ArgsReader(commandName, rawArgs);
 
-                return factory((TEntity)entity, reader);
+                return factory(concreteEntity, reader);
             });
 
             return this;

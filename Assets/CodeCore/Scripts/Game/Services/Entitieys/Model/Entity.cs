@@ -24,4 +24,5 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Model
         }
 
     }
+
 }

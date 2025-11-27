@@ -9,12 +9,12 @@ namespace Assets.CodeCore.Scripts.Game.Services
 
         public void Register(string commandName, CommandFactoryDelegate factory)
         {          
-            _factories[commandName.ToLower()] = factory;
+            _factories[commandName] = factory;
         }
 
         public bool TryCreateCommand(string commandName, Entity entity, object[] args, out ICommand command)
         {
-            if (_factories.TryGetValue(commandName.ToLower(), out var factory))
+            if (_factories.TryGetValue(commandName, out var factory))
             {
                 command = factory(entity, args);
                 return true;
