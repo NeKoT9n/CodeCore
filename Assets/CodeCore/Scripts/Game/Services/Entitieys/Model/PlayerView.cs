@@ -9,6 +9,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Model
     public class PlayerView : EntityView
     {
         [SerializeField] private float _stepDuration;
+        [SerializeField] private Ease _moveEase;
 
         private Tween _moveTween;
         public async UniTask MoveLeft(int steps)
@@ -28,7 +29,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Model
             _moveTween = transform
                 .DOMoveX(steps, _stepDuration * Mathf.Abs(steps))
                 .SetRelative()
-                .SetEase(Ease.InElastic);
+                .SetEase(_moveEase);
 
             await _moveTween.ToUniTask(
                 TweenCancelBehaviour.KillAndCancelAwait,

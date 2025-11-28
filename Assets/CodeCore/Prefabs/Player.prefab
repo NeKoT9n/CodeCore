@@ -418,9 +418,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2655fe5bffe29194a8338e1e5e8204cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.CodeCore.Scripts.Game.Services.Entitieys.Model.PlayerView
-  _entityTypeId: 1
   _scriptView: {fileID: 3619394118404871326}
   _stepDuration: 1
+  _moveEase: 28
 --- !u!1 &9025084009394720409
 GameObject:
   m_ObjectHideFlags: 0

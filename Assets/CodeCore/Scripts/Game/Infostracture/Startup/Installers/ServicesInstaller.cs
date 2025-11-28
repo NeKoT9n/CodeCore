@@ -2,6 +2,7 @@
 using Assets.CodeCore.Scripts.Game.Infostracture.StateMachine.States;
 using Assets.CodeCore.Scripts.Game.Services;
 using Assets.CodeCore.Scripts.Game.Services.Code.Model;
+using Assets.CodeCore.Scripts.Game.Services.Commands.Profiles;
 using Assets.CodeCore.Scripts.Game.Services.Commands.Registry;
 using Assets.CodeCore.Scripts.Game.Services.Entitieys.Factory.Model;
 using Assets.CodeCore.Scripts.Game.Services.Entitieys.Model;
@@ -58,7 +59,7 @@ namespace Assets.CodeCore.Scripts.Game.Startup
         private void BindProfiles()
         {
             Container.Bind<ICommandProfile>().To<PlayerCommandProfile>().AsTransient();
-            //..
+            Container.Bind<ICommandProfile>().To<CommonCommandProfile>().AsTransient();
         }
     }
 }

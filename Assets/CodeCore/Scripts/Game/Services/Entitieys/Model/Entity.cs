@@ -1,6 +1,7 @@
 ﻿using Assets.CodeCore.Scripts.Game.Services.Entitieys.Data;
 using Assets.CodeCore.Scripts.Game.Services.Scripts.Data;
 using Assets.CodeCore.Scripts.Game.Services.Scripts.Model;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 

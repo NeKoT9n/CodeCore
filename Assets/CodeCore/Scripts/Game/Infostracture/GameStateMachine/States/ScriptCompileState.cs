@@ -36,7 +36,7 @@ namespace Assets.CodeCore.Scripts.Game.Infostracture.StateMachine.States
             foreach(var valuePair in result.Commands)
             {
                 var commands = valuePair.Value;
-                _commandService.Execute(commands, 5f);
+                _commandService.Execute(commands, 1f);
             } // test only
 
             _errorService.Show(result.Errors);
