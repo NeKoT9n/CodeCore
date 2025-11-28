@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets.CodeCore.Scripts.Game.Services.LevelData
   _name: Level_1
   _spawnPoints:
-  - _entityType: 2
-    _position: {x: 4.1364903, y: -1.6760001}
   - _entityType: 1
-    _position: {x: 5.05649, y: -3.75}
+    _position: {x: 0.60649, y: -0.63600016}
   - _entityType: 1
-    _position: {x: 0.68999994, y: -3.75}
+    _position: {x: -3.4135098, y: -2.456}
+  - _entityType: 1
+    _position: {x: 5.52649, y: -0.73600006}

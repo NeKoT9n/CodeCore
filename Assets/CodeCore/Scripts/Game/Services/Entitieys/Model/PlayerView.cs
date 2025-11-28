@@ -1,7 +1,8 @@
 ﻿using Assets.CodeCore.Scripts.Game.Services.Scripts.View;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System;
 using UnityEngine;
+
 
 namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Model
 {
@@ -10,24 +11,28 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Model
         [SerializeField] private float _stepDuration;
 
         private Tween _moveTween;
-        public void MoveLeft(int steps, Action callback = null)
+        public async UniTask MoveLeft(int steps)
         {
-            Move(-steps, callback);
+            await Move(-steps);
         }
 
-        public void MoveRight(int steps, Action callback = null)
+        public async UniTask MoveRight(int steps)
         {
-            Move(steps, callback);
+            await Move(steps);
         }
 
-        private void Move(int steps, Action callback)
+        private async UniTask Move(int steps)
         {
             _moveTween?.Kill();
 
             _moveTween = transform
                 .DOMoveX(steps, _stepDuration * Mathf.Abs(steps))
                 .SetRelative()
-                .OnComplete(() => callback?.Invoke());
+                .SetEase(Ease.InElastic);
+
+            await _moveTween.ToUniTask(
+                TweenCancelBehaviour.KillAndCancelAwait,
+                this.GetCancellationTokenOnDestroy());
         }
     }
 }

@@ -4,6 +4,7 @@ using Assets.CodeCore.Scripts.Game.Services.Entitieys.Model;
 using Assets.CodeCore.Scripts.Game.Services.Entitieys.Presenter;
 using UnityEngine;
 using UniRx;
+using Cysharp.Threading.Tasks;
 
 namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Factory.Presenters
 {
@@ -23,18 +24,22 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Factory.Presenters
         {
             base.Initialize();
 
-            _model.Moved.Subscribe(moveData => HandleMove(moveData.Steps, moveData.Direction));
+            _model.Moved.Subscribe(moveData => HandleMove(moveData));
             
         }
 
-        private void HandleMove(int steps, Vector2 direction)
+        private async void HandleMove(MoveData data)
         {
-            if (direction.x > 0)
-                _view.MoveRight(steps);
+            if (data.Direction.x > 0)
+                await _view.MoveRight(data.Steps);
 
             else
-                _view.MoveLeft(steps);
+                await _view.MoveLeft(data.Steps);
+
+            data.CompletionSource.TrySetResult(AsyncUnit.Default);
         }
+
+        
 
         public override void Dispose()
         {

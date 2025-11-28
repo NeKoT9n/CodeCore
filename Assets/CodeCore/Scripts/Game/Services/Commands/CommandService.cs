@@ -1,5 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using UnityEngine;
+
 
 namespace Assets.CodeCore.Scripts.Commands
 {
@@ -9,7 +11,10 @@ namespace Assets.CodeCore.Scripts.Commands
 
         public async UniTask Execute(ICommand command)
         {
-            await command?.Execute();
+            if(command == null)
+                return;
+
+            await command.Execute();
             _history.Push(command);
         }
 

@@ -20,9 +20,7 @@ namespace Assets.CodeCore.Scripts.Game.Services
 
         public UniTask Execute()
         {
-            _entity.Move(_steps, _direction);
-
-            return UniTask.CompletedTask;
+            return _entity.Move(_steps, _direction);
         }
     }
 }
