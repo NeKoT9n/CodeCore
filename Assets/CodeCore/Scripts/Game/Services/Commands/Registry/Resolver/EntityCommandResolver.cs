@@ -12,7 +12,7 @@ namespace Assets.CodeCore.Scripts.Game.Services
             _factories[commandName] = factory;
         }
 
-        public bool TryCreateCommand(string commandName, Entity entity, object[] args, out ICommand command)
+        public bool TryCreateCommand(string commandName, Player entity, object[] args, out ICommand command)
         {
             if (_factories.TryGetValue(commandName, out var factory))
             {

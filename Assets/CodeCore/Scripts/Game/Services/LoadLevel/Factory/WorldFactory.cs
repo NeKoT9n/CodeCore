@@ -26,12 +26,13 @@ namespace Assets.CodeCore.Scripts.Game.Services
             _diContainer = diContainer;
         }
 
-        public async UniTask<EntityView> CreateEntity(AssetReferenceGameObject reference, Vector2 position)
+        public async UniTask<Tview> CreateEntity<Tview>(AssetReferenceGameObject reference, Vector2 position)
+            where Tview: EntityView
         {
             var prefab = await _assetProvider.LoadGameObject<EntityView>(reference);
             var go = _diContainer
                 .InstantiatePrefab(prefab, position, Quaternion.identity, null)
-                .GetComponent<EntityView>();
+                .GetComponent<Tview>();
 
             return go; 
         }

@@ -3,22 +3,17 @@ using UniRx;
 
 namespace Assets.CodeCore.Scripts.Game.Services.Code.Model
 {
-    public class CodeService
+    public class CodeEditorService
     {
-        private ReactiveProperty<Script> _current = new(null);
+        private readonly ReactiveProperty<Script> _current = new(null);
         public IReadOnlyReactiveProperty<Script> Current => _current;
 
-        public void OpenScript(Script script)
+        public void OpenEditor(Script script)
         {
             _current.Value = script;
         }
 
-        public void SaveCode(Script script, string codeText)
-        {
-            script?.SetCode(codeText); 
-        }
-
-        public void Close()
+        public void CloseEditor()
         {
             _current.Value = null;
         }

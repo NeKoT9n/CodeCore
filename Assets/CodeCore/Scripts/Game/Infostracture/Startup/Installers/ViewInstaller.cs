@@ -1,5 +1,6 @@
 ﻿using Assets.CodeCore.Scripts.Game.Services.Code.Presenter;
 using Assets.CodeCore.Scripts.Game.Services.Code.View;
+using Assets.CodeCore.Scripts.Game.Services.Entitieys.Factory.Presenters;
 using Assets.CodeCore.Scripts.Game.Services.Entitieys.Model;
 using Assets.CodeCore.Scripts.Game.Services.Entitieys.Presenter;
 using System;
@@ -17,7 +18,8 @@ namespace Assets.CodeCore.Scripts.Game.Infostracture.Startup.Installers
         [SerializeField] private CodeView _codeView;
         public override void InstallBindings()
         {
-            Container.Bind<EntityViewFactory>().AsSingle();
+            BindViewFactories();
+            BindPresenterFactories();
 
             Container
                 .BindInterfacesTo<EntityListPresenter>()
@@ -29,6 +31,20 @@ namespace Assets.CodeCore.Scripts.Game.Infostracture.Startup.Installers
                .AsSingle()
                .WithArguments(_codeView)
                .NonLazy();
+        }
+
+        private void BindPresenterFactories()
+        {
+            Container.Bind<EntityPresenterFactory>().AsSingle();
+
+            Container.Bind<IEntityPresenterFactoryPlugin>().To<PlayerPresenterFactoryPlugin>().AsTransient();
+        }
+
+        private void BindViewFactories()
+        {
+            Container.Bind<EntityViewFactory>().AsSingle();
+
+            Container.Bind<IEntityViewFactoryPlugin>().To<PlayerViewFactoryPlugin>().AsTransient();
         }
     }
 }

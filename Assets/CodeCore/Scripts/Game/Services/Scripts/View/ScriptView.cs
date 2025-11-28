@@ -8,7 +8,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Scripts.View
     public class ScriptView : UIBase
     {
         private UIButton _button;
-        public event Action Edit;
+        public event Action Clicked;
 
         private void Awake()
         {
@@ -17,12 +17,12 @@ namespace Assets.CodeCore.Scripts.Game.Services.Scripts.View
 
         private void OnEnable()
         {
-            _button.Pressed += () => Edit?.Invoke();
+            _button.Pressed += () => Clicked?.Invoke();
         }
 
         private void OnDisable()
         {
-            _button.Pressed -= () => Edit?.Invoke();
+            _button.Pressed -= () => Clicked?.Invoke();
         }
     }
 }

@@ -9,12 +9,13 @@ namespace Assets.CodeCore.Scripts.Game.Services.Code.Presenter
 {
     public class CodePresenter : IInitializable, IDisposable
     {
-        private readonly CodeService _codeService;
+        private readonly CodeEditorService _codeService;
         private readonly CodeView _codeView;
 
         private readonly CompositeDisposable _disposables = new();
+        private IDisposable _activeScriptSubscription;
 
-        public CodePresenter(CodeService codeService, CodeView codeView)
+        public CodePresenter(CodeEditorService codeService, CodeView codeView)
         {
             _codeService = codeService;
             _codeView = codeView;
@@ -23,39 +24,34 @@ namespace Assets.CodeCore.Scripts.Game.Services.Code.Presenter
         public void Initialize()
         {
             _codeService.Current
-                .Pairwise()
-                .Subscribe(pair => Handle(pair.Previous, pair.Current))
+                .Subscribe(HandleActiveScriptChanged)
                 .AddTo(_disposables);
 
-            _codeView.CloseButtonClicked += Close;
+            _codeView.CloseButtonClicked
+                .Subscribe(_ => _codeService.CloseEditor());
         }
 
-        private void Handle(Script previous, Script current)
+        private void HandleActiveScriptChanged(Script script)
         {
-            if (previous != null)
-                _codeService.SaveCode(previous, _codeView.GetCode());
+            _activeScriptSubscription?.Dispose();
 
-            if(current != null)
-                OpenView(current);
-            else
+            if (script == null)
+            {
                 _codeView.Hide();
-        }
+                return;
+            }
 
-        private void OpenView(Script script)
-        {
-            _codeView.SetName(script.Name + ".cs");
             _codeView.SetCode(script.Code);
+            _codeView.SetName(script.Name);
             _codeView.Show();
-        }
 
-        private void Close()
-        {   
-            _codeService.Close();
+            _activeScriptSubscription = _codeView.CodeChanched
+                .Subscribe(code => script.SetCode(code));
         }
 
         public void Dispose()
         {
-            _codeView.CloseButtonClicked -= Close;
+           
             _disposables.Dispose();
         }
     }

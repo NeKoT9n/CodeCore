@@ -1,6 +1,7 @@
 ﻿using Assets.CodeCore.Scripts.Game.Services.Entitieys.Impl;
 using Cysharp.Threading.Tasks;
-using System.Numerics;
+using UnityEngine;
+
 
 namespace Assets.CodeCore.Scripts.Game.Services
 {
@@ -8,21 +9,18 @@ namespace Assets.CodeCore.Scripts.Game.Services
     {
         private readonly IMovable _entity;
         private readonly int _steps;
-        private readonly bool _leftDirection;
+        private readonly Vector2 _direction;
 
         public MoveCommand(IMovable entity, int steps, Vector2 direction)
         {
             _entity = entity;
             _steps = steps;
-            _leftDirection = direction.X < 0;
+            _direction = direction;
         }
 
         public UniTask Execute()
         {
-            if (_leftDirection)
-                _entity.MoveLeft(_steps);
-            else
-                _entity.MoveRight(_steps);
+            _entity.Move(_steps, _direction);
 
             return UniTask.CompletedTask;
         }

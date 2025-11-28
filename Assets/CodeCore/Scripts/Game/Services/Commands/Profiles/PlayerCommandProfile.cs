@@ -1,6 +1,6 @@
 ﻿using Assets.CodeCore.Scripts.Game.Services.Entitieys.Impl;
 using Assets.CodeCore.Scripts.Game.Services.Scripts.Data;
-using System.Numerics;
+using UnityEngine;
 
 namespace Assets.CodeCore.Scripts.Game.Services
 {

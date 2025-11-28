@@ -15,7 +15,7 @@ namespace Assets.CodeCore.Scripts.Game.Services
         public CommandConfigurator Bind<TEntity>(
             string commandName,
             Func<TEntity, ArgsReader, ICommand> factory)
-            where TEntity : Entity
+            where TEntity : Player
         {
             _resolver.Register(commandName, (entity, rawArgs) =>
             {

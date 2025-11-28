@@ -1,6 +1,7 @@
 ﻿using Assets.CodeCore.Scripts.Game.UI.Base;
 using System;
 using TMPro;
+using UniRx;
 using UnityEngine;
 
 namespace Assets.CodeCore.Scripts.Game.Services.Code.View
@@ -11,11 +12,16 @@ namespace Assets.CodeCore.Scripts.Game.Services.Code.View
         [SerializeField] private TMP_InputField _codeText;
         [SerializeField] private TextMeshProUGUI _nameText;
 
-        public event Action CloseButtonClicked;
+        private readonly Subject<string> _codeChanched = new();
+        private readonly Subject<Unit> _close = new();
+
+        public IObservable<Unit> CloseButtonClicked => _close;
+        public IObservable<string> CodeChanched => _codeChanched;
 
         private void OnEnable()
         {
-            _closeButton.Pressed += () => CloseButtonClicked?.Invoke();
+            _closeButton.Pressed += () => _close.OnNext(Unit.Default);
+            _codeText.onEndEdit.AddListener(text => _codeChanched.OnNext(text));
         }
 
         public void SetCode(string code)
@@ -28,14 +34,10 @@ namespace Assets.CodeCore.Scripts.Game.Services.Code.View
             _nameText.text = name;
         }
 
-        public string GetCode()
-        {
-            return _codeText.text;
-        }
-
         public void OnDisable()
         {
-            _closeButton.Pressed -= () => CloseButtonClicked?.Invoke();
+            _closeButton.Pressed -= () => _close.OnNext(Unit.Default);
+            _codeText.onEndEdit.RemoveListener(text => _codeChanched.OnNext(text));
         }
 
 

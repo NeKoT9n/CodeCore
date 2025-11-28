@@ -3,6 +3,7 @@ using Assets.CodeCore.Scripts.Game.Infostracture.StateMachine.States;
 using Assets.CodeCore.Scripts.Game.Services;
 using Assets.CodeCore.Scripts.Game.Services.Code.Model;
 using Assets.CodeCore.Scripts.Game.Services.Commands.Registry;
+using Assets.CodeCore.Scripts.Game.Services.Entitieys.Factory.Model;
 using Assets.CodeCore.Scripts.Game.Services.Entitieys.Model;
 using Zenject;
 
@@ -18,7 +19,7 @@ namespace Assets.CodeCore.Scripts.Game.Startup
                 .AsSingle();
 
             Container
-                .Bind<CodeService>()
+                .Bind<CodeEditorService>()
                 .AsSingle();
 
             Container
@@ -32,25 +33,17 @@ namespace Assets.CodeCore.Scripts.Game.Startup
 
         private void BindCompileSystem()
         {
-            Container
-                .Bind<ICompiler>()
-                .To<ScriptCompileService>()
-                .AsSingle();
-
-            Container
-               .Bind<IErrorService>()
-               .To<ErrorService>()
-               .AsSingle();
-
-            Container
-               .Bind<IParser>()
-               .To<ScriptParser>()
-               .AsSingle();
+            Container.Bind<ICompiler>().To<ScriptCompileService>().AsSingle();
+            Container.Bind<IErrorService>().To<ErrorService>().AsSingle();
+            Container.Bind<IParser>().To<ScriptParser>().AsSingle();
         }
 
         private void BindFactories()
         {
             Container.Bind<EntityFactory>().AsSingle();
+
+            Container.Bind<IEntityFactoryPlugin>().To<PlayerFactoryPlugin>().AsTransient();
+            //...
         }
 
         private void BindCommands()

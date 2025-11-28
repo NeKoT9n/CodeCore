@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Assets.CodeCore.Scripts.Game.Services
 {
-    public delegate ICommand CommandFactoryDelegate(Entity entity, object[] args);
+    public delegate ICommand CommandFactoryDelegate(Player entity, object[] args);
 
     public class CommandRegistry
     {
@@ -19,7 +19,7 @@ namespace Assets.CodeCore.Scripts.Game.Services
             return _resolvers[typeId];
         }
 
-        public ICommand Create(EntityTypeId typeId, string commandName, Entity entity, object[] args)
+        public ICommand Create(EntityTypeId typeId, string commandName, Player entity, object[] args)
         {
 
             if (_resolvers.TryGetValue(typeId, out var resolver) == false)

@@ -4,30 +4,34 @@ using Assets.CodeCore.Scripts.Game.Services.Scripts.View;
 using System;
 using UnityEngine;
 using Zenject;
+using UniRx;
 
 namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Presenter
 {
     public class EntityPresenter : IInitializable, IDisposable
     {
-        private readonly Entity _entity;
-        private readonly CodeService _codeService;
+        private readonly Player _entity;
+        private readonly CodeEditorService _codeService;
 
         private readonly EntityView _entityView;
-        private readonly ScriptView _scriptView;
+
+        private readonly CompositeDisposable _disposables = new();
 
         public EntityPresenter(
-            Entity entity,
+            Player entity,
             EntityView entityView,
-            CodeService codeService)
+            CodeEditorService codeService)
         {
             _entity = entity;
             _codeService = codeService;
             _entityView = entityView;
-            _scriptView = _entityView.ScriptView;
         }
+
         public void Initialize()
         {
-            _scriptView.Edit += OpenScript;
+            _entityView.ScriptViewClicked
+                .Subscribe(_ => OpenScript())
+                .AddTo(_disposables);
         }
 
         public void DestroyView()
@@ -38,12 +42,12 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Presenter
 
         private void OpenScript()
         {
-            _codeService.OpenScript(_entity.Script);
+            _codeService.OpenEditor(_entity.Script);
         }
 
         public void Dispose()
         {
-            _scriptView.Edit -= OpenScript;
+            _disposables.Dispose();
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Assets.CodeCore.Scripts.Game.Infostracture.StateMachine.States
 {
     public interface ICompiler
     {
-        public CompileResult Compile(IEnumerable<Entity> entities); 
+        public CompileResult Compile(IEnumerable<Player> entities); 
     }
 
 }
