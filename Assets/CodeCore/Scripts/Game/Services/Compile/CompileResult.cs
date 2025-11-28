@@ -8,7 +8,7 @@ namespace Assets.CodeCore.Scripts.Game.Infostracture.StateMachine.States
         public readonly bool IsFailure => !Errors.IsEmpty();
 
         public ScriptErrors Errors;
-        public Dictionary<Player, List<ICommand>> Commands;
+        public Dictionary<Entity, List<ICommand>> Commands;
     }
 
 }

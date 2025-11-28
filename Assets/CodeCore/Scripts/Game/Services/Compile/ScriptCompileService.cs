@@ -19,7 +19,7 @@ namespace Assets.CodeCore.Scripts.Game.Infostracture.StateMachine.States
             _commandRegistry = commandRegistry;
         }
 
-        public CompileResult Compile(IEnumerable<Player> entities)
+        public CompileResult Compile(IEnumerable<Entity> entities)
         {
             var result = new CompileResult() { Errors = new(), Commands = new() };
 
@@ -38,7 +38,7 @@ namespace Assets.CodeCore.Scripts.Game.Infostracture.StateMachine.States
             return result;
         }
 
-        public (List<ICommand> Commands, List<string> Errors) CompileEntity(Player entity)
+        public (List<ICommand> Commands, List<string> Errors) CompileEntity(Entity entity)
         {
             Script script = entity.Script;
             if (script == null)
@@ -74,7 +74,7 @@ namespace Assets.CodeCore.Scripts.Game.Infostracture.StateMachine.States
             return (commands, errors);
         }
 
-        private ICommand CreateCommand(Player entity, ParseResult parseResult)
+        private ICommand CreateCommand(Entity entity, ParseResult parseResult)
         {
             return _commandRegistry.Create(
                 entity.Type,

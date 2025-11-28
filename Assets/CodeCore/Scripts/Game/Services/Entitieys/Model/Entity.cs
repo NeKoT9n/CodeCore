@@ -6,7 +6,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Model
 {
-    public class Player
+    public class Entity
     {
         private readonly EntityData _entityData;
 
@@ -16,7 +16,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Model
         public Vector2 SpawnPosition { get; private set; }
         public Script Script { get; private set; }
 
-        public Player(EntityData entityData, Vector2 spawnPosition)
+        public Entity(EntityData entityData, Vector2 spawnPosition)
         {
             _entityData = entityData;
             SpawnPosition = spawnPosition;

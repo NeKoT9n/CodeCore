@@ -7,6 +7,6 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Factory.Model
 {
     public interface IEntityFactoryPlugin : IFactoryPlugin<EntityTypeId>
     {
-        public Player Create(EntityData entityData, Vector2 spawnPosition);
+        public Entity Create(EntityData entityData, Vector2 spawnPosition);
     }
 }

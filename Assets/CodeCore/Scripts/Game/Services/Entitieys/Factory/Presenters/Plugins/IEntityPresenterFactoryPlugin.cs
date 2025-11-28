@@ -7,6 +7,6 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Factory.Presenters
 {
     public interface IEntityPresenterFactoryPlugin : IFactoryPlugin<EntityTypeId>
     {
-        public EntityPresenter Create(Player player, EntityView view);
+        public EntityPresenter Create(Entity player, EntityView view);
     }
 }

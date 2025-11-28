@@ -12,7 +12,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Model
         public EntityViewFactory(
             IEnumerable<IEntityViewFactoryPlugin> factories) : base(factories) { }
 
-        public async UniTask<EntityView> Spawn(Player entity)
+        public async UniTask<EntityView> Spawn(Entity entity)
         {
             var factory = GetFactory(entity.Type);
             return await factory.Create(entity.Prefab, entity.SpawnPosition);

@@ -1,6 +1,7 @@
 ﻿using Assets.CodeCore.Scripts.Game.Services.Entitieys.Data;
 using Assets.CodeCore.Scripts.Game.Services.Entitieys.Model;
 using System;
+using UniRx;
 using UnityEngine;
 
 namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Impl
@@ -10,10 +11,11 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Impl
         public void Move(int steps, Vector2 direction);
     }
 
-    public class Player : Model.Player, IMovable
+    public class Player : Entity, IMovable
     {
 
-        public event Action<int, Vector2> MoveAction;
+        private readonly Subject<MoveData> _move = new();
+        public IObservable<MoveData> Moved => _move; 
         public Player(EntityData entityData, Vector2 spawnPosition)
             : base(entityData, spawnPosition)
         {
@@ -21,8 +23,20 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Impl
 
         public void Move(int steps, Vector2 direction)
         {
-            MoveAction?.Invoke(steps, direction);
+            _move.OnNext(new(steps,direction));
         }
 
+    }
+
+    public struct MoveData
+    {
+        public int Steps;
+        public Vector2 Direction;
+
+        public MoveData(int steps, Vector2 direction)
+        {
+            Steps = steps;
+            Direction = direction;
+        }
     }
 }

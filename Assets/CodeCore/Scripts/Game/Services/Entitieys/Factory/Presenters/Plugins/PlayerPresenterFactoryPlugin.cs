@@ -1,4 +1,5 @@
 ﻿using Assets.CodeCore.Scripts.Game.Services.Code.Model;
+using Assets.CodeCore.Scripts.Game.Services.Entitieys.Impl;
 using Assets.CodeCore.Scripts.Game.Services.Entitieys.Model;
 using Assets.CodeCore.Scripts.Game.Services.Entitieys.Presenter;
 using Assets.CodeCore.Scripts.Game.Services.Scripts.Data;
@@ -16,9 +17,9 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Factory.Presenters
             _codeEditorService = codeEditorService;
         }
 
-        public EntityPresenter Create(Player player, EntityView view)
+        public EntityPresenter Create(Entity player, EntityView view)
         {
-            return new PlayerPresenter(player, view, _codeEditorService);
+            return new PlayerPresenter((Player)player, (PlayerView)view, _codeEditorService);
         }
     }
 }

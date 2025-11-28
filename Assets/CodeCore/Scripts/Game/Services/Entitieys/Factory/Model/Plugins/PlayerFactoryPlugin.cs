@@ -10,7 +10,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Factory.Model
     {
         public EntityTypeId Key => EntityTypeId.Player;
 
-        public Entitieys.Model.Player Create(EntityData entityData, Vector2 spawnPosition)
+        public Entitieys.Model.Entity Create(EntityData entityData, Vector2 spawnPosition)
         {
             return new Impl.Player(entityData, spawnPosition);
         }

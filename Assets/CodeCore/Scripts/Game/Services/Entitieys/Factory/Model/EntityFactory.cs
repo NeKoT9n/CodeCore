@@ -21,7 +21,7 @@ namespace Assets.CodeCore.Scripts.Game.Services
             _entityDataProvider = entityDataProvider;      
         }
 
-        public Player Create(EntityTypeId typeId, Vector2 position)
+        public Entity Create(EntityTypeId typeId, Vector2 position)
         {
             EntityData data = _entityDataProvider.GetBy(typeId);
             var factory = GetFactory(typeId);
@@ -29,9 +29,9 @@ namespace Assets.CodeCore.Scripts.Game.Services
             return factory.Create(data, position);
         }
 
-        public List<Player> Create(List<SpawnPoint> spawnPoints)
+        public List<Entity> Create(List<SpawnPoint> spawnPoints)
         {
-            var spawnedEntity = new List<Player>(spawnPoints.Count);
+            var spawnedEntity = new List<Entity>(spawnPoints.Count);
 
             foreach (var spawnPoint in spawnPoints)
             {

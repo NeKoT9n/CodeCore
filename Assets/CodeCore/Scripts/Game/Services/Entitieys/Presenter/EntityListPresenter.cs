@@ -15,7 +15,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Presenter
         private readonly EntityViewFactory _entityViewFactory;
         private readonly EntityPresenterFactory _entityPresenterFactory;
 
-        private readonly Dictionary<Player, EntityPresenter> _entities = new();
+        private readonly Dictionary<Entity, EntityPresenter> _entities = new();
 
         private readonly CompositeDisposable _disposables = new();
 
@@ -44,7 +44,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Presenter
                 .AddTo(_disposables);
         }
 
-        private async void CreateEntity(CollectionAddEvent<Player> e)
+        private async void CreateEntity(CollectionAddEvent<Entity> e)
         {
             var view = await _entityViewFactory.Spawn(e.Value);
             EntityPresenter presenter = _entityPresenterFactory.Create(e.Value, view);
@@ -52,7 +52,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Presenter
             _entities.Add(e.Value, presenter);
         }
 
-        private void RemoveEntity(CollectionRemoveEvent<Player> e)
+        private void RemoveEntity(CollectionRemoveEvent<Entity> e)
         {
             var presenter = _entities[e.Value];
             presenter.DestroyView();

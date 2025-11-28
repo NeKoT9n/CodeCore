@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 4374132249573734525}
   - component: {fileID: 5886475621632954997}
   - component: {fileID: 5725864815051902523}
-  - component: {fileID: 3156936808221906689}
+  - component: {fileID: -4312794417454780994}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -406,7 +406,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3156936808221906689
+--- !u!114 &-4312794417454780994
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -415,11 +415,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7198742443208278329}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c65e52197f91442ab36ab2853763e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 2655fe5bffe29194a8338e1e5e8204cb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Assets.CodeCore.Scripts.Game.Services.Scripts.View.EntityView
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.CodeCore.Scripts.Game.Services.Entitieys.Model.PlayerView
   _entityTypeId: 1
   _scriptView: {fileID: 3619394118404871326}
+  _stepDuration: 1
 --- !u!1 &9025084009394720409
 GameObject:
   m_ObjectHideFlags: 0

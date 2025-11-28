@@ -12,7 +12,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Factory.Presenters
         public EntityPresenterFactory(
             IEnumerable<IEntityPresenterFactoryPlugin> factories) : base(factories) { }
 
-        public EntityPresenter Create(Player entity, EntityView view)
+        public EntityPresenter Create(Entity entity, EntityView view)
         {
             var factory = GetFactory(entity.Type);
 

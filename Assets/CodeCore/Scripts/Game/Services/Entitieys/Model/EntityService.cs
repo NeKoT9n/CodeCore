@@ -7,11 +7,11 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Model
 {
     public class EntityService
     {
-        private readonly ReactiveCollection<Player> _entities = new();
+        private readonly ReactiveCollection<Entity> _entities = new();
 
-        public IReadOnlyReactiveCollection<Player> Entities => _entities;
+        public IReadOnlyReactiveCollection<Entity> Entities => _entities;
 
-        public void Add(IEnumerable<Player> entities)
+        public void Add(IEnumerable<Entity> entities)
         {
             foreach(var entity in entities)
             {
@@ -19,7 +19,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Model
             }
         }
 
-        public void Add(Player entity)
+        public void Add(Entity entity)
         {
             _entities.Add(entity);
         }

@@ -10,7 +10,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Presenter
 {
     public class EntityPresenter : IInitializable, IDisposable
     {
-        private readonly Player _entity;
+        private readonly Entity _entity;
         private readonly CodeEditorService _codeService;
 
         private readonly EntityView _entityView;
@@ -18,7 +18,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Presenter
         private readonly CompositeDisposable _disposables = new();
 
         public EntityPresenter(
-            Player entity,
+            Entity entity,
             EntityView entityView,
             CodeEditorService codeService)
         {
@@ -27,7 +27,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Presenter
             _entityView = entityView;
         }
 
-        public void Initialize()
+        public virtual void Initialize()
         {
             _entityView.ScriptViewClicked
                 .Subscribe(_ => OpenScript())
@@ -45,7 +45,7 @@ namespace Assets.CodeCore.Scripts.Game.Services.Entitieys.Presenter
             _codeService.OpenEditor(_entity.Script);
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             _disposables.Dispose();
         }

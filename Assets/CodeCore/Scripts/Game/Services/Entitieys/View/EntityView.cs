@@ -7,7 +7,6 @@ namespace Assets.CodeCore.Scripts.Game.Services.Scripts.View
 {
     public class EntityView : WorldView
     {
-        [SerializeField] private EntityTypeId _entityTypeId;
         [SerializeField] private ScriptView _scriptView;
 
         private readonly Subject<Unit> _scriptClicked = new();
